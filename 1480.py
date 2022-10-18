@@ -20,12 +20,25 @@
 # -10^6 <= nums[i] <= 10^6
 
 # loop through array and add new number with the result of the last addition
+# keep those results individually and in order in a list
 
 def main():
     nums = [1, 2, 3, 4]
-    sums = nums[0]
-    for n in nums[1:]:
-        sums = n + sums[n-1]
+    sums = []
+    last = 0
+    for n in nums:
+        last += n
+        sums.append(last)
+    
     print(sums)
 
+# gotta find a fix for the index problem in a python for loop
+# def better_solution():
+#     nums = [1, 2, 3, 4]
+#     for n in range(len(nums)):
+#         nums[n] += nums[n - 1]
+    
+#     return nums
+
 main()
+# print(better_solution())
