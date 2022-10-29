@@ -21,8 +21,8 @@
 # s and t consist of any valid ascii character.
 
 def main():
-    s = "egg"
-    t = "add"
+    s = "papera"
+    t = "popele"
     print(isIsomorphic(s, t))
 
 def isIsomorphic(s: str, t: str) -> bool:
@@ -47,13 +47,17 @@ def isIsomorphic(s: str, t: str) -> bool:
             print(position)
             print(t[position])
             print(c)
-            print(i)
+            print(s[position])
             # and check if the old_s char is the same as the current one we're in the loop
-            
+            if t[position] == t[i]:
+                new_s += t[i]
             # if yes, swap and keep going
             # if no, return false
+            else:
+                return False
         # if not just swap it and keep going
         else:
             new_s += t[i]
 
+        return True
 main()
