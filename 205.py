@@ -21,11 +21,11 @@
 # s and t consist of any valid ascii character.
 
 def main():
-    s = "papera"
-    t = "popele"
+    s = "abbbaaaba"
+    t = "baaabbbba"
     print(isIsomorphic(s, t))
 
-def isIsomorphic(s: str, t: str) -> bool:
+def isdumb(s: str, t: str) -> bool:
     # both strings should be equal in length
     # each char in a string should uniquely map to another char in the other string
     
@@ -59,5 +59,29 @@ def isIsomorphic(s: str, t: str) -> bool:
         else:
             new_s += t[i]
 
-        return True
+    return True
+
+
+# an actual solution
+def isIsomorphic(s, t):
+    # iterate over both strings and add each mapping into two dicts
+    # confirm each time if that mapping is already on dict
+    # if the key is already there but the value that would be added is different, then return false
+
+    s_d = {}
+    t_d = {}
+
+    # loop through the strings
+    for i, c in enumerate(s):
+        # check if current char is in dict t
+        if c in t_d:
+            #if yes, then check if the value of that key in the dict is equal to current iterable char
+            if t_d[c] == c:
+                pass
+        
+        else:
+            # if no, then add it to the dictionary along with value (opposite string char)
+            s_d += {c: t[i]}
+
+
 main()
