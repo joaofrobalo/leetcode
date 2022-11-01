@@ -21,8 +21,8 @@
 # s and t consist of any valid ascii character.
 
 def main():
-    s = "abbbaaaba"
-    t = "baaabbbba"
+    s = "badc"
+    t = "baba"
     print(isIsomorphic(s, t))
 
 def isdumb(s: str, t: str) -> bool:
@@ -74,14 +74,44 @@ def isIsomorphic(s, t):
     # loop through the strings
     for i, c in enumerate(s):
         # check if current char is in dict t
-        if c in t_d:
-            #if yes, then check if the value of that key in the dict is equal to current iterable char
-            if t_d[c] == c:
+        if c in s_d:
+            # if yes, then check if the value of that key in the dict is equal to current iterable char
+            if s_d[c] == t[i]:
+                # do nothing
+                # print("It's already mapped")
                 pass
+            # if key value pair is diff, then return false
+            else:
+                # print("mapped but wrong value")
+                return False
+        elif t[i] in t_d:
+            return False
         
         else:
             # if no, then add it to the dictionary along with value (opposite string char)
-            s_d += {c: t[i]}
+            s_d[c] = t[i]
+            t_d[t[i]] = c
 
+    return True
+
+# the leetcode solution:
+def isIsomorphicButBetter(self, s: str, t: str) -> bool:
+        
+        mapping_s_t = {}
+        mapping_t_s = {}
+        
+        for c1, c2 in zip(s, t):
+            
+            # Case 1: No mapping exists in either of the dictionaries
+            if (c1 not in mapping_s_t) and (c2 not in mapping_t_s):
+                mapping_s_t[c1] = c2
+                mapping_t_s[c2] = c1
+            
+            # Case 2: Ether mapping doesn't exist in one of the dictionaries or Mapping exists and
+            # it doesn't match in either of the dictionaries or both            
+            elif mapping_s_t.get(c1) != c2 or mapping_t_s.get(c2) != c1:
+                return False
+            
+        return True
 
 main()
